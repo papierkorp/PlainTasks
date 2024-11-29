@@ -346,6 +346,7 @@ class PlainTasksCancelCommand(PlainTasksBase):
             open_matches = re.match(rom, line_contents, re.U)
             done_matches = re.match(rdm, line_contents, re.U)
             canc_matches = re.match(rcm, line_contents, re.U)
+            review_matches = re.search(r'@review', line_contents)
             started_matches = re.findall(started, line_contents, re.U)
             toggle_matches = re.findall(toggle, line_contents, re.U)
 
@@ -358,6 +359,9 @@ class PlainTasksCancelCommand(PlainTasksBase):
 
             current_scope = self.view.scope_name(line.a)
             if 'pending' in current_scope:
+                if review_matches:
+                    sublime.status_message('Cannot complete a task marked for review')
+                    continue
                 grps = open_matches.groups()
                 len_cle = self.view.insert(edit, line.end(), canc_line_end)
                 replacement = u'%s%s%s' % (grps[0], self.canc_tasks_bullet, grps[2].rstrip())
@@ -404,6 +408,42 @@ class PlainTasksCancelCommand(PlainTasksBase):
 
         PlainTasksStatsStatus.set_stats(self.view)
         self.view.run_command('plain_tasks_toggle_highlight_past_due')
+
+class PlainTasksToggleReviewCommand(PlainTasksBase):
+    def runCommand(self, edit):
+        for region in self.view.sel():
+            line = self.view.line(region)
+            line_contents = self.view.substr(line)
+            current_scope = self.view.scope_name(line.begin())
+
+            # Extract indentation
+            indent_match = re.match(r"^(\s*)", line_contents)
+            indentation = indent_match.group(1) if indent_match else ""
+
+            if "@review" in line_contents:
+                # Remove @review tag
+                new_contents = re.sub(r"@review(\([^)]*\))?", "", line_contents).strip()
+                if "review" in current_scope:
+                    # Change bullet from review to open
+                    new_contents = new_contents.replace(
+                        self.review_tasks_bullet, self.open_tasks_bullet, 1
+                    )
+            else:
+                # Remove existing bullet
+                new_contents = re.sub(
+                    r"^\s*[☐❍▪▫–—≡→›✘xX✓✔⚑]\s*", "", line_contents
+                ).strip()
+
+                # Add review bullet and tag
+                new_contents = self.review_tasks_bullet + " " + new_contents
+                new_contents = new_contents.rstrip() + " @review"
+
+            # Reapply indentation
+            new_contents = indentation + new_contents
+
+            self.view.replace(edit, line, new_contents)
+
+        PlainTasksStatsStatus.set_stats(self.view)
 
 
 class PlainTasksArchiveCommand(PlainTasksBase):

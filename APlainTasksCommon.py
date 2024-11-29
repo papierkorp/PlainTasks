@@ -28,6 +28,7 @@ class PlainTasksBase(sublime_plugin.TextCommand):
             self.open_tasks_bullet = settings.get('open_tasks_bullet', u'☐')
             self.done_tasks_bullet = settings.get('done_tasks_bullet', u'✔')
             self.canc_tasks_bullet = settings.get('cancelled_tasks_bullet', u'✘')
+            self.review_tasks_bullet = "⚑"
             self.before_date_space = settings.get('before_date_space', ' ')
 
         translate_tabs_to_spaces = settings.get('translate_tabs_to_spaces', False)

@@ -31,5 +31,6 @@
     [
       { "key": "selector", "operator": "equal", "operand": "text.todo meta.tag.todo.completed, text.todo meta.tag.todo.cancelled" }
     ]
-  }
+  },
+  { "keys": ["super+x"], "command": "plain_tasks_toggle_review", "context": [{"key": "selector", "operator": "equal", "operand": "text.todo"}] },
 ]

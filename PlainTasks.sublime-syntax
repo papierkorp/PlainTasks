@@ -10,6 +10,10 @@ contexts:
   main:
     - match: '^\s*(\#?\s?\w+.*?:\s*?(\@[^\s]+(\(.*?\))?\s*?)*$\n?)'
       scope: keyword.control.header.todo
+    - match: '^\s*(?:[⚑])(?=\s)'
+      scope: punctuation.definition.bullet.review.todo
+    - match: '(?<=\s)@review(?![\w\d])'
+      scope: keyword.other.tag.review.todo
     - match: '^\s*(?:(\+|✓|✔|☑|√|\[x\])(\s+(?:[^\@\n]|(?<!\s)\@|\@(?=\s))*)([^\n]*))|^\s*(?:(-)(\s+(?:[^\@]|(?<!\s)\@|\@(?=\s))*)(.*\@done(?=\s|\(|$)[^\n]*))'
       scope: meta.item.todo.completed
       captures:
