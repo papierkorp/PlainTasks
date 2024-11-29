@@ -549,6 +549,49 @@
 				<string>bold</string>
 			</dict>
 		</dict>
+        <dict>
+            <key>name</key>
+            <string>Review Tag</string>
+            <key>scope</key>
+            <string>keyword.other.tag.review.todo</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#FF8C00</string>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Review Task</string>
+            <key>scope</key>
+            <string>meta.item.todo.review</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#FFA500</string>
+                <key>background</key>
+                <string>#FFE4B544</string>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+        </dict>
+
+        <dict>
+            <key>name</key>
+            <string>Review Task Bullet</string>
+            <key>scope</key>
+            <string>punctuation.definition.bullet.review.todo</string>
+            <key>settings</key>
+            <dict>
+                <key>foreground</key>
+                <string>#FF8C00</string>
+                <key>fontStyle</key>
+                <string>bold</string>
+            </dict>
+        </dict>
 		<dict>
 			<key>name</key>
 			<string>Critical</string>

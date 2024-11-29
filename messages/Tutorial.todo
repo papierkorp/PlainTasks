@@ -19,6 +19,9 @@ Tasks:
    ☐ ⌘+d (ctrl+d on Windows) marks a task as done
    ☐ Pressing ⌘+d (ctrl+d on Windows) again puts it back in pending mode
    ☐ ctrl+c (alt+c on Windows) marks the task as cancelled
+  Review:
+   ☐ ⌘+x (alt+x on Windows) sets a task in review
+   ☐ Pressing ⌘+x (ctrl+x on Windows) again puts it back in pending mode
   Tagging:
    ☐ You can add tags using @ sign, like this @tag
      You can place cursors on tags, click right mouse button and **Filter by tags under cursors**
